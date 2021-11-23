@@ -1,0 +1,124 @@
+algoritmo Missao3;
+// Síntese
+//  Objetivo:  
+//  Entrada :
+//  Saída   :
+
+
+principal
+	// Declarações
+	inteiro alunos, menu, aprovados, reprovados, x;
+	real notas, maior, menor;
+	
+	notas=1;	
+	alunos=0;
+	aprovados=0;
+	reprovados=0;
+	x=0;
+	menu=0;
+	// Instruções
+	
+
+	enquanto (notas>=0) faca
+		notas=escreverNotas();
+			alunos=alunos+1;
+
+		se(notas>=5) entao
+			aprovados=aprovados+1;
+			senao
+			reprovados=reprovados+1;
+		fimSe
+
+		se (x==0) entao
+			maior=notas;
+			menor=notas;
+			x=1;
+		fimSe
+			
+		se (notas>maior)entao
+			maior=notas;
+			senao 
+			se(notas<menor)entao
+			menor=notas;
+			fimSe
+		fimSe
+	fimEnquanto
+
+	
+	faca
+		menu = escolherMenu();
+		opcao(menu, alunos, aprovados, reprovados, maior, menor);	
+	enquanto (menu !=6); 
+
+fimPrincipal
+
+	procedimento variaveis()
+		
+	fimProcedimento
+
+	funcao real escreverNotas()
+		real notas;
+		escreval("Digite a nota: ");
+		leia(notas);
+		se (notas<0) entao
+			interrompa;
+		fimSe
+		
+		retorna notas;
+	fimFuncao
+
+	procedimento escreverMenu()
+		escreval("");
+		escreval("MENU");
+		escreval("");
+		escreval("Escolha uma opção do menu: ");
+		escreval("1- Total de Alunos");
+		escreval("2- Quantidade de Aprovados");
+		escreval("3- Quantidade de Reprovados");
+		escreval("4- Maior Nota");
+		escreval("5- Menor Nota");
+		escreval("6- Sair");
+		escreval("");
+	fimProcedimento
+
+	funcao inteiro escolherMenu()
+		inteiro menu;
+		escreverMenu();
+		leia(menu);
+		
+		retorna menu;
+	fimFuncao
+
+	procedimento opcao (inteiro menu, inteiro alunos, inteiro aprovados, inteiro reprovados, real maior, real menor)
+	escolha(menu)
+		caso 1 //Total de Alunos
+				escreval("O total de alunos é de " + alunos + " alunos.");
+			interrompa; 
+			
+			caso 2 //Quantidade de Aprovados
+				escreval("A quantidade de alunos aprovados é de "+ aprovados + " alunos.");
+			interrompa;
+			
+			caso 3 //Quantidade de Reprovados
+				escreval("A quantidade de alunos reprovados é de "+ reprovados +" alunos.");
+			interrompa;
+			
+			caso 4 //Maior Nota
+				escreval("A maior nota é "+ maior + " pontos.");
+			interrompa; 
+			
+			caso 5 //Menor Nota
+				escreval("A menor nota é "+ menor + " pontos.");
+			interrompa;
+			
+			caso 6 //Sair
+				escreval("Obrigada pela visita!");
+			interrompa;
+				
+			outroCaso //se digitar um numero que nao esta no menu
+				escreval("Opção desconhecida! Tente novamente.");
+			interrompa;
+				
+		fimEscolha
+	fimProcedimento
+	

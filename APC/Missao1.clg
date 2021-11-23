@@ -1,0 +1,91 @@
+algoritmo Missao1;
+// Síntese
+//  Objetivo:  criar um programa que realize a operaçao escolhida pelo usuario
+//  Entrada :  opcao, altura, peso, imc, num1, num2 e result
+//  Saída   :  informacoes sobre o dono do programa, imc=peso/altura*altura e result=num1*num2
+
+
+principal
+	// Declarações
+	inteiro opcao;
+	real altura, peso, imc;
+	inteiro num1, num2, result;
+	// Instruções
+
+	escreval("MENU");
+	escreval("Escolha uma opção do menu: ");
+	escreval("1- Informações");
+	escreval("2- Calcular IMC");
+	escreval("3- Multiplicação");
+	escreval("4- Sair");
+
+	leia(opcao);
+
+	escolha(opcao)
+		caso 1 //informações
+			escreval("Informações do aluno dono do programa:");
+			escreval(" ");
+			escreval("Nome: Ana Beatriz Ferreira dos Santos.");
+		interrompa;
+		
+		caso 2 //calcular imc
+			escreval("Digite sua altura: ");
+			leia(altura);
+			escreval("Digite o seu peso: ");	
+			leia(peso);
+
+			imc = peso/(altura*altura);
+
+			escreval("Seu IMC é: "+ imc + ".");
+
+			se (imc<18.5)entao
+				escreval("Abaixo do Peso.");
+				interrompa;
+				fimSe
+
+				se(imc>=18.5 e imc<24.9)entao
+				escreval("Peso Normal.");
+				interrompa;
+				fimSe
+
+					se(imc>=25 e imc<29.9)entao
+					escreval("Sobrepeso.");
+					interrompa;
+					fimSe
+
+						se(imc>=30 e imc<34.9)entao
+						escreval("Obesidade Grau I.");
+						interrompa;
+						fimSe
+
+							se(imc>=35 e imc<39.9)entao
+							escreval("Obesidade Grau II.");
+							interrompa;
+
+							senao
+							escreval("Obesidade Grau III ou Mórbida.");
+							fimSe
+		interrompa;
+
+		caso 3 //multiplicar
+			escreval("Digite o primeiro número: ");
+			leia(num1);
+			escreval("Digite o segundo número: ");
+			leia(num2);
+
+			result = num1*num2;
+
+			escreval("O resultado dessa operação é: " + result + ".");
+		interrompa;
+
+		caso 4 //sair
+			escreval("Obrigada por sua visita!");
+		interrompa;
+
+		outroCaso //se digitar um numero que não esta no menu
+			escreval("Opção desconhecida! Tente novamente.");
+		
+	fimEscolha
+
+	
+fimPrincipal

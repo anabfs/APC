@@ -1,0 +1,166 @@
+algoritmo semNome;
+// Síntese
+//  Objetivo:  
+//  Entrada :
+//  Saída   :
+
+
+principal
+	// Declarações
+	inteiro n, menu, i;
+	real notas[1000];
+	menu = 0;
+	
+	// Instruções
+	enquanto(menu != 7) faca
+	
+		menu = escolherMenu();
+		escolha(menu)
+		
+			caso 1 //cadastrar notas
+			informacao();
+			leia(n);	
+				escreval("Informe as "+n+" notas");
+				n=n-1;
+			cadastrar(notas, n);	
+			interrompa;
+	
+			caso 2 //lista todas as notas cadastradas até o momento
+			cadastradas(notas, n);
+			interrompa;
+	
+			caso 3 //imprime a média de todas as notas cadastradas
+			mediaNotas(notas, n);
+			interrompa;
+	
+			caso 4 //listar todas as notas que são >= 5
+			aprovados(notas, n);
+			interrompa;
+	
+			caso 5 //listar todas as notas que são < 5
+			reprovados(notas, n);
+			interrompa;
+			
+			caso 6 //listar as notas maiores que a média geral da turma
+			maiorMedia(notas, n);
+			interrompa;
+	
+			caso 7 //sair
+				escreval("Obrigada pela visita!");
+			interrompa;
+	
+			outroCaso //se digitar um numero que nao esta no menu
+				escreval("Opção desconhecida! Tente novamente.");
+			interrompa;
+		fimEscolha
+	fimEnquanto
+	
+
+
+fimPrincipal
+
+procedimento escreverMenu()
+	escreval("");
+	escreval("            MENU");
+	escreval("");
+	escreval("Escolha uma opção do menu: ");
+	escreval("1- Cadastrar Nota");
+	escreval("2- Listar Notas");
+	escreval("3- Imprimir Média");
+	escreval("4- Listar Aprovados");
+	escreval("5- Listar Reprovados");
+	escreval("6- Listar Notas Maiores Que A Média Geral Da Turma");
+	escreval("7- Sair");
+	escreval("");
+fimProcedimento
+
+funcao inteiro escolherMenu()
+	inteiro menu;
+	escreverMenu();
+	leia(menu);	
+	limpaTela();	
+	retorna menu;
+fimFuncao
+
+procedimento informacao()
+	escreval("Informe quantas notas deseja cadastrar:");
+	escreval("Obs.: Só seram validas notas de 0 - 10.");
+	escreval("");
+fimProcedimento
+
+procedimento cadastrar (real notas[], inteiro n)
+	inteiro i;
+	para(i de 0 ate n passo 1) faca
+		leia(notas[i]);
+			enquanto (notas[i] < 0 ou notas[i] >10) faca
+				escreval ("Nota inválida, tente novamente:");
+				leia (notas[i]);
+			fimEnquanto
+	fimPara
+	escreval("Notas cadastradas com sucesso!");
+fimProcedimento
+
+procedimento cadastradas(real notas[], inteiro n)
+	inteiro i;
+	escreval("Essas foram as notas cadastradas:");
+		para(i de 0 ate n passo 1) faca
+			escreval(notas[i]);
+		fimPara
+fimProcedimento
+
+procedimento mediaNotas (real notas[], inteiro n)
+	inteiro i, soma, novoN;
+	real media;
+	soma = 0;
+	novoN = n+1;
+	para (i de 0 ate n passo 1) faca
+		soma = soma + notas[i];
+	fimPara
+	media = (soma/ novoN);
+	escreval ("A Média das Notas é: ", media);
+fimProcedimento
+
+procedimento aprovados (real notas[], inteiro n)
+	inteiro i, apr;
+	apr=0;
+	para(i de 0 ate n passo 1) faca
+		se (notas[i] >=5) entao
+			escreval(notas[i]);
+			apr=apr+1;
+		fimSe
+	fimPara
+	escreval("A quantidade de alunos aprovados é de "+ apr + ".");
+fimProcedimento
+
+procedimento reprovados (real notas[], inteiro n)
+	inteiro i, rep;
+	rep=0;
+	para(i de 0 ate n passo 1) faca
+		se (notas[i] <5) entao
+			escreval(notas[i]);
+			rep=rep+1;
+		fimSe
+	fimPara
+	escreval("A quantidade de alunos reprovados é de "+ rep + ".");
+fimProcedimento
+
+procedimento maiorMedia (real notas[], inteiro n)
+	inteiro i, soma, novoN;
+	real mediaTurma, media;
+	soma=0;
+	media=0;
+	novoN=n+1;
+
+	para(i de 0 ate n passo 1) faca
+		soma=soma+notas[i];
+	fimPara
+
+	mediaTurma=soma/novoN;
+
+	escreval ("Essas são as notas maiores que a média geral da turma:");
+	para(i de 0 ate n passo 1) faca
+		se (notas[i] > mediaTurma) entao
+		escreval (notas[i]);
+		fimSe
+	fimPara
+fimProcedimento

@@ -1,0 +1,193 @@
+algoritmo missao5;
+// Síntese
+//  Objetivo:  
+//  Entrada :
+//  Saída   :
+
+
+principal
+	// Declarações
+	inteiro n, menu, i;
+	real notas[1000];
+	texto nomes[1000];
+	menu = 0;
+	
+	// Instruções
+	enquanto(menu != 6) faca
+	
+		menu = escolherMenu();
+		escolha(menu)
+		
+			caso 1 //cadastrar estudantes
+			informacao();
+			leia(n);	
+				escreval("Redistre as informações dos "+n+" alunos.");
+				n=n-1;
+			cadastrar_nomes(nomes, n);
+			escreval("Obs.: Só seram validas notas de 0 - 10.");
+			cadastrar_notas(notas, n, nomes);	
+			interrompa;
+	
+			caso 2 //lista todos os estudantes cadastrados até o momento
+			cadastradas(notas, n, nomes);
+			interrompa;
+	
+			caso 3 //listar todas as notas que são >= 5
+			aprovados(notas, n, nomes);
+			interrompa;
+	
+			caso 4 //listar todas as notas que são < 5
+			reprovados(notas, n, nomes);
+			interrompa;
+			
+			caso 5 //pesquisar alunos pelo nome
+			pesquisar(notas, n, nomes);
+			interrompa;
+	
+			caso 6 //sair
+				escreval("Obrigada pela visita!");
+			interrompa;
+	
+			outroCaso //se digitar um numero que nao esta no menu
+				escreval("Opção desconhecida! Tente novamente.");
+			interrompa;
+		fimEscolha
+	fimEnquanto
+	
+
+
+fimPrincipal
+
+procedimento escreverMenu()
+	escreval("");
+	escreval("            MENU");
+	escreval("");
+	escreval("Escolha uma opção do menu: ");
+	escreval("1- Cadastrar Estudantes");
+	escreval("2- Listar Estudantes");
+	escreval("3- Listar Aprovados");
+	escreval("4- Listar Reprovados");
+	escreval("5- Pesquisar Estudante");
+	escreval("6- Sair");
+	escreval("");
+fimProcedimento
+
+funcao inteiro escolherMenu()
+	inteiro menu;
+	escreverMenu();
+	leia(menu);	
+	limpaTela();	
+	retorna menu;
+fimFuncao
+
+procedimento informacao()
+	escreval("Informe QUANTOS estudantes deseja cadastrar:");
+	escreval("");
+fimProcedimento
+
+procedimento cadastrar_nomes(texto nomes[], inteiro n)
+	inteiro i;
+	escreval("Digitar o nome com a PRIMEIRA letra MAIUSCULA!");
+	para(i de 0 ate n passo 1) faca
+		escreval("Digite o nome do aluno:");
+		leia(nomes[i]);
+			enquanto (tamanhoTexto (nomes[i])<3) faca
+				escreval("Nome invalido, tente novamente:");
+				leia(nomes[i]);
+			fimEnquanto
+	fimPara
+fimProcedimento
+
+procedimento cadastrar_notas(real notas[], inteiro n, texto nomes[])
+	inteiro i;
+	para(i de 0 ate n passo 1) faca
+		escreval("Informe a nota do(a) aluno(a) " + nomes[i] + ":");
+		leia(notas[i]);
+			enquanto(notas[i] < 0 ou notas[i] >10) faca
+				escreval("Nota inválida, tente novamente:");
+				leia(notas[i]);
+			fimEnquanto
+	fimPara
+	escreval("Etudantes cadastrados com sucesso!");
+fimProcedimento
+
+procedimento cadastradas(real notas[], inteiro n, texto nomes[])
+	inteiro i;
+	escreval("Esses foram os estudantes cadastrados:");
+	escreval("Nome - Nota - Situação");
+		para(i de 0 ate n passo 1) faca
+			se (notas[i] >= 5) entao
+				escreval(nomes[i] + " - " + notas[i] + " - APROVADO(A)");
+			senao
+				escreval(nomes[i] + " - " + notas[i] + " - REPROVADO(A)");
+			fimSe
+		fimPara
+fimProcedimento
+
+procedimento aprovados (real notas[], inteiro n, texto nomes[])
+	inteiro i, apr;
+	apr=0;
+	escreval("Nome - Nota");
+	para(i de 0 ate n passo 1) faca
+		se (notas[i] >=5) entao
+			escreval(nomes[i] + " - " + notas[i]);
+			apr=apr+1;
+		fimSe
+	fimPara
+	escreval("A quantidade de alunos aprovados é de "+ apr + ".");
+fimProcedimento
+
+procedimento reprovados (real notas[], inteiro n, texto nomes[])
+	inteiro i, rep;
+	real faltantes;
+	rep=0;
+	escreval("Nome - Nota - Pontos Faltantes");
+	para(i de 0 ate n passo 1) faca
+		faltantes = 5-notas[i];
+		se (notas[i] <5) entao
+			escreval(nomes[i] + " - " + notas[i] + " - " + faltantes);
+			rep=rep+1;
+		fimSe
+	fimPara
+	escreval("A quantidade de alunos reprovados é de "+ rep + ".");
+fimProcedimento
+
+procedimento pesquisar (real notas[], inteiro n, texto nomes[])
+	inteiro i;
+	texto nomeDig;
+	logico nomeResul;
+	nomeResul = falso;
+	escreval("Digite o nome do estudante que deseja achar:");
+	escreval("Obs.: Digitar o nome com a PRIMEIRA letra MAIUSCULA!");
+	leia(nomeDig);
+	escreval("Nome - Menção");
+	para(i de 0 ate n passo 1) faca
+		se (comparaTexto(nomes[i], nomeDig)==0) entao
+			se (notas[i] >= 9) entao
+			escreval(nomes[i] + " - SS");
+		senao
+			se (notas[i] >= 7 e notas[i]<9) entao
+				escreval(nomes[i] + " - MS");
+			senao
+				se (notas[i] >= 5 e notas[i]<7) entao
+					escreval(nomes[i] + " - MM");
+				senao
+					se (notas[i] >= 3 e notas[i]<5) entao
+						escreval(nomes[i] + " - MI");
+					senao
+						se (notas[i] >= 1 e notas[i]<3) entao
+							escreval(nomes[i] + " - II");
+							senao
+							escreval(nomes[i] + " - SR");
+						fimSe
+					fimSe
+				fimSe
+			fimSe
+		fimSe
+			nomeResul = verdadeiro;
+		fimSe
+	fimPara
+		se (nomeResul == falso) entao
+			escreval("Aluno não encontrado!");
+		fimSe	
+fimProcedimento

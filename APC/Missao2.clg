@@ -1,0 +1,98 @@
+algoritmo Missao2;
+// Síntese
+//  Objetivo:  
+//  Entrada :
+//  Saída   :
+
+
+principal
+	// Declarações
+	inteiro alunos, menu, aprovados, reprovados, x;
+	real notas, maior, menor;
+	// Instruções
+	notas=1;	
+	alunos=0;
+	aprovados=0;
+	reprovados=0;
+	x=0;	
+	
+	enquanto (notas>=0) faca		
+		escreval("Digite a nota: ");
+		leia(notas);
+		se (notas<0) entao
+		interrompa;
+		senao
+			alunos=alunos+1;
+			
+			se (notas>=5) entao
+				aprovados=aprovados+1;
+				senao
+					reprovados=reprovados+1;
+			fimSe
+			
+			se (x==0) entao
+				maior=notas;
+				menor=notas;
+				x=1;
+			fimSe
+			
+			se (notas>maior)entao
+				maior=notas;
+				senao 
+					se(notas<menor)entao
+					menor=notas;
+				fimSe
+			fimSe
+		fimSe
+		
+	fimEnquanto
+
+	menu=0;
+	
+	enquanto (menu !=6) faca
+		escreval("");
+		escreval("MENU");
+		escreval("");
+		escreval("Escolha uma opção do menu: ");
+		escreval("1- Total de Alunos");
+		escreval("2- Quantidade de Aprovados");
+		escreval("3- Quantidade de Reprovados");
+		escreval("4- Maior Nota");
+		escreval("5- Menor Nota");
+		escreval("6- Sair");
+		escreval("");
+	
+		leia(menu);
+		escolha(menu)
+			caso 1 //Total de Alunos
+				escreval("O total de alunos é de " + alunos + " alunos.");
+			interrompa; 
+			
+			caso 2 //Quantidade de Aprovados
+				escreval("A quantidade de alunos aprovados é de "+ aprovados + " alunos.");
+			interrompa;
+			
+			caso 3 //Quantidade de Reprovados
+				escreval("A quantidade de alunos reprovados é de "+ reprovados +" alunos.");
+			interrompa;
+			
+			caso 4 //Maior Nota
+				escreval("A maior nota é "+ maior + " pontos.");
+			interrompa; 
+			
+			caso 5 //Menor Nota
+				escreval("A menor nota é "+ menor + " pontos.");
+			interrompa;
+			
+			caso 6 //Sair
+				escreval("Obrigada pela visita!");
+			interrompa;
+				
+			outroCaso //se digitar um numero que nao esta no menu
+				escreval("Opção desconhecida! Tente novamente.");
+			interrompa;
+				
+		fimEscolha
+	fimEnquanto
+	
+fimPrincipal
